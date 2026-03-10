@@ -65,7 +65,7 @@
         </nav>
 
     </div>
-    <article class="max-w-3xl mx-auto px-4 py-12 shadow-sm min-h-screen text-white">
+    <article class="max-w-3xl rounded-md mx-auto px-8 py-12 shadow-sm min-h-screen text-white bg-gray-700 mb-3">
 
         <!-- Article Header -->
 
@@ -115,17 +115,23 @@
                 <span class="bg-blue-900 text-gray-200 px-3 py-1 rounded-full text-sm">
                     {{ $post->category->name }}
                 </span>
+                <span class="bg-blue-900 text-gray-200 px-3 py-1 rounded-full text-sm">
+                    Created at {{ $post->created_at->diffForHumans() }}
+                </span>
+                <span class="bg-blue-900 text-gray-200 px-3 py-1 rounded-full text-sm">
+                    Updated at: {{ $post->updated_at->diffForHumans() }}
+                </span>
             </div>
         </div>
         @auth
             @if (Auth::user()->id === $post->user_id || Auth::user()->user_type === 'admin')
                 <div class="mt-8 flex space-x-4">
-                    <a href="{{ route('posts.edit', $post->id) }}"
+                    <a href="{{ route('posts.edit', $post) }}"
                         class="px-4 py-2 rounded-lg bg-yellow-500 text-white font-semibold hover:bg-yellow-600 transition-colors">
                         Edit
                     </a>
 
-                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                    <form action="{{ route('posts.destroy', $post) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this post?');">
                         @csrf
                         @method('DELETE')
@@ -140,4 +146,53 @@
         @endauth
 
     </article>
+    <div class="max-w-3xl mx-auto px-4 mb-8 py-8 bg-gray-600 rounded-md shadow-sm">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-white">Comments</h2>
+
+        <!-- Comment Form -->
+        @auth
+            <form action="{{ route('comments.store', $post) }}" method="POST" class="mb-6 space-y-4">
+                @csrf
+                <textarea name="message" placeholder="Add your comment..."
+                    class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
+                    rows="4" required></textarea>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    Post Comment
+                </button>
+            </form>
+        @else
+            <p class="text-gray-300">Please <a href="{{ route('login') }}" class="text-blue-400">login</a> to post a comment.
+            </p>
+        @endauth
+
+        <!-- Comments List -->
+        <div class="space-y-4">
+            @forelse ($post->comments as $comment)
+                <div class="border-l-4 border-blue-600 bg-gray-50 p-4 rounded-r-lg">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <span class="font-semibold text-gray-900">{{ $comment->user->name }}</span>
+                        <span class="text-sm text-gray-500">{{ $comment->created_at->diffForHumans() }}</span>
+                    </div>
+                    <p class="text-gray-800">{{ $comment->message }}</p>
+                    @auth
+                        @if (auth()->user()->id === $comment->user_id || auth()->user()->role === 'admin')
+                            <div class="flex ">
+                                {{-- <a href="{{ route('comments.edit', $comment->id) }}"
+                                    class="text-yellow-500 hover:underline text-sm">Edit</a> --}}
+
+                                <form action="{{ route('comments.destroy', $comment) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:underline text-sm">Delete</button>
+                                </form>
+                            </div>
+                        @endif
+                    @endauth
+                </div>
+            @empty
+                <p class="text-gray-300">No comments yet. Be the first to comment!</p>
+            @endforelse
+        </div>
+    </div>
 @endsection

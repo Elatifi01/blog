@@ -6,6 +6,9 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{-- @include('categories.create') --}}
                 {{-- @include('categories.index') --}}
+                @section('content')
+                    <div class="h-96 "></div>
+                @endsection
             </div>
         </div>
     </div>

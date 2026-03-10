@@ -59,7 +59,7 @@
             </div> @empty <p class="text-gray-400 text-center col-span-3"> No posts yet. </p>
             @endforelse
         </div> <!-- Button -->
-        <div class="text-center">
+        <div class="text-center py-8">
             <a href="{{ route('posts.index') }}" class="px-8 py-4 rounded-lg bg-blue-600 text-white font-semibold">
                 View All Posts </a>
         </div>

@@ -16,7 +16,7 @@
     @endif
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl h-full  mx-auto sm:px-6 lg:px-8">
 
             <!-- Header with title and button -->
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">

@@ -16,6 +16,7 @@
 <body class="bg-gray-900 ">
 
     @yield('content')
+    @include('components.footer')
 </body>
 
 </html>

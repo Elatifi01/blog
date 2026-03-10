@@ -37,6 +37,7 @@
         <!-- Page Content -->
         <main>
             @yield('content')
+            @include('components.footer')
         </main>
     </div>
 

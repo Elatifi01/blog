@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([
@@ -51,3 +52,12 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 // WYSIWIG
 Route::post('/posts/upload-image', [PostController::class, 'uploadImage'])->name('posts.upload-image');
 Route::get('/search', [PostController::class, 'search'])->name('posts.search');
+
+// comments
+
+
+
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
