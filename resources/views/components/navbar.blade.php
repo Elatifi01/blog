@@ -17,11 +17,13 @@
           hover:text-blue-500 dark:hover:text-blue-400
           before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-0 before:bg-blue-500
           before:transition-all before:duration-300 hover:before:w-full">Home</a>
-            <a href="{{ route('categories.index') }}"
-                class="relative pb-1 text-gray-700 dark:text-gray-200 font-medium transition-colors duration-300
+            @auth
+                <a href="{{ route('categories.index') }}"
+                    class="relative pb-1 text-gray-700 dark:text-gray-200 font-medium transition-colors duration-300
           hover:text-blue-500 dark:hover:text-blue-400
           before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-0 before:bg-blue-500
           before:transition-all before:duration-300 hover:before:w-full">Categories</a>
+            @endauth
             <a href="{{ route('posts.index') }}"
                 class="relative pb-1 text-gray-700 dark:text-gray-200 font-medium transition-colors duration-300
           hover:text-blue-500 dark:hover:text-blue-400
