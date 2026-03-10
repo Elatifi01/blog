@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.appall')
 @section('content')
     @if (session('success'))
         <div id="flash-message" class="fixed top-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50">

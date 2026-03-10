@@ -1,5 +1,4 @@
-@extends('layouts.app-guest')
-
+@extends('layouts.appall')
 @section('content')
     @if (session('success'))
         <div id="success-message"
@@ -14,7 +13,6 @@
             }, 1000);
         </script>
     @endif
-    @include('components.nav-guest')
 
     <div class="max-w-4xl mx-auto mt-10 mb-6 px-4">
 

@@ -1,6 +1,5 @@
-@extends('layouts.app-guest')
+@extends('layouts.appall')
 @section('content')
-    @include('components.nav-guest')
     <section class="w-full">
         <div
             class="w-full h-[620px] bg-[url('https://images.unsplash.com/photo-1690983322857-0811d47fedfc?q=80&w=1202&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center ">

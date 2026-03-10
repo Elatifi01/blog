@@ -14,7 +14,7 @@
 </head>
 
 <body class="bg-gray-900 ">
-
+    @include('components.navbar')
     @yield('content')
     @include('components.footer')
 </body>

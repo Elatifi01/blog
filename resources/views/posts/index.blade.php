@@ -1,7 +1,6 @@
-@extends('layouts.app-guest')
+@extends('layouts.appall')
 
 @section('content')
-    @include('components.nav-guest')
     <section class="py-20 bg-white dark:bg-gray-900" x-data="{ inView: false }" x-init="setTimeout(() => inView = true, 500)">
         <div class="mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
