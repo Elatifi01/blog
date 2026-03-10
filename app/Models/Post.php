@@ -9,6 +9,7 @@ class Post extends Model
     protected $fillable = [
         'title',
         'thumbnail',
+        'slug',
         'video',
         'content',
         'user_id',
@@ -23,5 +24,9 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }

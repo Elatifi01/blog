@@ -9,12 +9,20 @@
                 <div :class="{ 'opacity-100 translate-y-0': inView, 'opacity-0 translate-y-8': !inView }"
                     class="transition-all duration-1000 ease-out">
                     <h2 class="mb-4 text-4xl font-bold text-gray-900 sm:text-5xl dark:text-white">
-                        Our Blog
+                        Delicious Recipes
                     </h2>
                     <p class="mx-auto text-xl text-gray-600 dark:text-gray-300">
-                        Stay updated with the latest industry insights, tips, and trends from our expert team.
+                        Discover tasty recipes, cooking tips, and inspiration for your kitchen
                     </p>
-
+                    <form action="{{ route('posts.search') }}" method="GET">
+                        <div class="xl:w-1/2 lg:w-[60%] sm:w-[70%] w-[90%] mx-auto flex gap-2 md:mt-6 mt-6">
+                            <input type="text" name="query"
+                                class="border border-gray-400 w-full p-2 rounded-md text-xl pl-2"
+                                placeholder="Search Recette..." value="{{ request('query') }}" />
+                            <button type="submit"
+                                class="px-[10px] bg-blue-500 text-lg text-white rounded-md font-semibold">Search</button>
+                        </div>
+                    </form>
                     <!-- Create Post Button for Admin/Author -->
                     @if (auth()->user())
                         <a href="{{ route('posts.create') }}"
@@ -39,7 +47,7 @@
                                 <!-- Hover overlay -->
                                 <div
                                     class="absolute inset-0 bg-black/60 group-hover:bg-opacity-40 transition-all duration-300 items-center justify-center opacity-0 group-hover:opacity-100 flex bg-opacity-0">
-                                    <a href="{{ route('posts.show', $post->id) }}"
+                                    <a href="{{ route('posts.show', $post) }}"
                                         class="transition-colors duration-200 px-4 py-2 rounded-lg bg-blue-600 font-semibold text-white">
                                         Read More
                                     </a>

@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -41,6 +43,7 @@ class PostController extends Controller
             'video' => 'nullable|mimetypes:video/mp4,video/avi,video/mkv|max:10240',
             'content' => 'required',
         ]);
+        $data['slug'] = Str::slug($request->title);
         $data['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
         $data['video'] = $request->file('video') ? $request->file('video')->store('videos', 'public') : null;
         $data['user_id'] = Auth::id(); // or auth()->user()->id
@@ -72,8 +75,41 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'thumbnail' => 'nullable|image|max:2048',
+            'video' => 'nullable|mimetypes:video/mp4,video/avi,video/mkv|max:10240',
+            'content' => 'required',
+        ]);
+
+        // Replace thumbnail if uploaded
+        if ($request->file('thumbnail')) {
+
+            if ($post->thumbnail) {
+                Storage::disk('public')->delete($post->thumbnail);
+            }
+
+            $data['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
+        }
+
+        // Replace video if uploaded
+        if ($request->file('video')) {
+
+            if ($post->video) {
+                Storage::disk('public')->delete($post->video);
+            }
+
+            $data['video'] = $request->file('video')->store('videos', 'public');
+        }
+
+        $post->update($data);
+
+        return redirect()
+            ->route('posts.index')
+            ->with('success', 'Post updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -96,5 +132,16 @@ class PostController extends Controller
         return response()->json([
             'url' => asset('storage/' . $path)
         ]);
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $posts = \App\Models\Post::where('title', 'LIKE', "%{$query}%")
+            ->orWhere('content', 'LIKE', "%{$query}%")
+            ->orderBy('created_at', 'desc')
+            ->paginate(10); // optional: paginate results
+
+        return view('posts.index', compact('posts'));
     }
 }

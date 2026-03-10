@@ -85,7 +85,7 @@
                 <span class="text-gray-600">•</span>
                 <span>{{ $post->created_at->format('F j, Y') }}</span>
                 <span class="text-gray-600">•</span>
-                <span>{{ round(strlen(strip_tags($post->views)) / 200) }} View</span>
+                <span>{{ $post->views }} View</span>
             </div>
         </div>
 

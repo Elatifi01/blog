@@ -50,3 +50,4 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 
 // WYSIWIG
 Route::post('/posts/upload-image', [PostController::class, 'uploadImage'])->name('posts.upload-image');
+Route::get('/search', [PostController::class, 'search'])->name('posts.search');

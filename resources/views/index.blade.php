@@ -11,10 +11,10 @@
                     Discover Your New Recette</h1>
             </div>
             <div class=" mx-auto justify-center w-full">
-                <form>
+                <form action="{{ route('posts.search') }}" method="GET">
                     <div class="xl:w-1/2 lg:w-[60%] sm:w-[70%] w-[90%] mx-auto flex gap-2 md:mt-6 mt-6">
-                        <input type="text" class="border border-gray-400 w-full p-2 rounded-md text-xl pl-2"
-                            placeholder="" />
+                        <input type="text" name="query" class="border border-gray-400 w-full p-2 rounded-md text-xl pl-2"
+                            placeholder="Search Recette..." value="{{ request('query') }}" />
                         <button type="submit"
                             class="px-[10px] bg-blue-500 text-lg text-white rounded-md font-semibold">Search</button>
                     </div>
@@ -47,7 +47,7 @@
                                 class="object-cover group-hover:scale-105 transition-transform w-full h-[256px]" />
                             <div
                                 class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                                <a href="{{ route('posts.show', $post->id) }}"
+                                <a href="{{ route('posts.show', $post) }}"
                                     class="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold"> Read More </a>
                             </div>
                         </div>
