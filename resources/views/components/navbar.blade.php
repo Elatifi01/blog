@@ -5,15 +5,33 @@
 
         <!-- Logo -->
         <div>
-            <h2 class="text-black dark:text-white font-bold text-2xl">Blog</h2>
+            <a href="{{ route('home') }}">
+                <h2 class="text-black dark:text-white font-bold text-2xl">Blog</h2>
+            </a>
         </div>
 
         <!-- Desktop Menu -->
         <div class="hidden lg:flex space-x-10 text-base font-bold text-black/60 dark:text-white">
-            <a href="{{ route('home') }}" class="hover:underline">Home</a>
-            <a href="{{ route('categories.index') }}" class="hover:underline">Categories</a>
-            <a href="{{ route('posts.index') }}" class="hover:underline">Articles</a>
-            <a href="#" class="hover:underline">Contact</a>
+            <a href="{{ route('home') }}"
+                class="relative pb-1 text-gray-700 dark:text-gray-200 font-medium transition-colors duration-300
+          hover:text-blue-500 dark:hover:text-blue-400
+          before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-0 before:bg-blue-500
+          before:transition-all before:duration-300 hover:before:w-full">Home</a>
+            <a href="{{ route('categories.index') }}"
+                class="relative pb-1 text-gray-700 dark:text-gray-200 font-medium transition-colors duration-300
+          hover:text-blue-500 dark:hover:text-blue-400
+          before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-0 before:bg-blue-500
+          before:transition-all before:duration-300 hover:before:w-full">Categories</a>
+            <a href="{{ route('posts.index') }}"
+                class="relative pb-1 text-gray-700 dark:text-gray-200 font-medium transition-colors duration-300
+          hover:text-blue-500 dark:hover:text-blue-400
+          before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-0 before:bg-blue-500
+          before:transition-all before:duration-300 hover:before:w-full">Articles</a>
+            <a href="#"
+                class="relative pb-1 text-gray-700 dark:text-gray-200 font-medium transition-colors duration-300
+          hover:text-blue-500 dark:hover:text-blue-400
+          before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-0 before:bg-blue-500
+          before:transition-all before:duration-300 hover:before:w-full">Contact</a>
         </div>
 
         <!-- Auth Buttons (Desktop) -->
