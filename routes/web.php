@@ -54,9 +54,6 @@ Route::post('/posts/upload-image', [PostController::class, 'uploadImage'])->name
 Route::get('/search', [PostController::class, 'search'])->name('posts.search');
 
 // comments
-
-
-
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
 Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
