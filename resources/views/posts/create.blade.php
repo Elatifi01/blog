@@ -1,6 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (session('success'))
+        <div id="flash-message" class="fixed top-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50">
+            {{ session('success') }}
+        </div>
+
+        <script>
+            // Wait for DOM to load
+            document.addEventListener('DOMContentLoaded', function() {
+                const msg = document.getElementById('flash-message');
+                if (msg) {
+                    // Auto-hide after 3 seconds
+                    setTimeout(() => {
+                        msg.style.transition = 'opacity 0.5s';
+                        msg.style.opacity = '0';
+                        setTimeout(() => msg.remove(), 500);
+                    }, 3000);
+                }
+            });
+        </script>
+    @endif
     <div class="max-w-full mx-auto mt-10 px-4 sm:px-6 lg:px-8 dark:bg-gray-900 p-3 ">
         <!-- Card Container -->
         <div class="bg-white shadow-lg rounded-lg p-6 sm:p-8 md:p-10 max-w-3xl m-auto">

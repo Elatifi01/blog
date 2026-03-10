@@ -1,6 +1,21 @@
 @extends('layouts.app-guest')
 
 @section('content')
+    @if (session('success'))
+        <div id="success-message"
+            style=" top:20px; right:20px; background:#16a34a; color:white; padding:10px 16px; border-radius:6px; font-weight:500;">
+            {{ session('success') }}
+        </div>
+
+        <script>
+            setTimeout(() => {
+                const msg = document.getElementById('success-message');
+                if (msg) msg.style.display = 'none';
+            }, 1000);
+        </script>
+    @endif
+    @include('components.nav-guest')
+
     <div class="max-w-4xl mx-auto mt-10 mb-6 px-4">
 
         <nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-sm text-gray-400">
@@ -53,6 +68,7 @@
     <article class="max-w-3xl mx-auto px-4 py-12 shadow-sm min-h-screen text-white">
 
         <!-- Article Header -->
+
         <div class="mb-10 text-center">
             <div class="mb-4">
                 <span class="text-blue-400 font-semibold text-sm uppercase tracking-wide">
@@ -101,6 +117,27 @@
                 </span>
             </div>
         </div>
+        @auth
+            @if (Auth::user()->id === $post->user_id || Auth::user()->user_type === 'admin')
+                <div class="mt-8 flex space-x-4">
+                    <a href="{{ route('posts.edit', $post->id) }}"
+                        class="px-4 py-2 rounded-lg bg-yellow-500 text-white font-semibold hover:bg-yellow-600 transition-colors">
+                        Edit
+                    </a>
+
+                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete this post?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 transition-colors">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            @endif
+
+        @endauth
 
     </article>
 @endsection

@@ -1,3 +1,21 @@
+@if (session('success'))
+    <div id="flash-message" class="fixed top-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50">
+        {{ session('success') }}
+    </div>
+@endif
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const msg = document.getElementById('flash-message');
+        if (msg) {
+            setTimeout(() => {
+                msg.style.transition = 'opacity 0.5s';
+                msg.style.opacity = '0';
+                setTimeout(() => msg.remove(), 500);
+            }, 3000);
+        }
+    });
+</script>
 <div class="bg-white w-full mx-auto px-8 sm:px-6 lg:px-32" x-data="{ open: false }">
     <div class="flex justify-between h-16">
         <div class="flex">
